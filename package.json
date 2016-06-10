@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node ./src",
+    "debug": "node-debug ./src",
     "notify": "node ./src/tasks/notify",
     "test": "standard"
   },
@@ -23,8 +24,10 @@
     "express": "^4.13.4",
     "express-http-proxy": "^0.6.0",
     "github-trending": "^1.3.1",
+    "jquery": "^3.0.0",
     "lodash": "^4.6.1",
     "node-slack": "0.0.7",
+    "request": "^2.72.0",
     "slack": "^6.1.0"
   },
   "keywords": [
@@ -36,5 +39,8 @@
   "license": "MIT",
   "engines": {
     "node": "5.7.1"
+  },
+  "devDependencies": {
+    "browser-logger": "^1.0.0"
   }
 }
