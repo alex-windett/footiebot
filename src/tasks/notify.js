@@ -14,14 +14,15 @@ var bot = controller.spawn()
 bot.configureIncomingWebhook({ url: config('WEBHOOK_URL') })
 
 request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (error, response, body) {
+
+    const msgDefaults = {
+      response_type: 'in_channel',
+      username: 'Starbot',
+      icon_emoji: config('ICON_EMOJI')
+    }
+
     if (!error && response.statusCode == 200) {
 
-        const msgDefaults = {
-          response_type: 'in_channel',
-          username: 'Starbot',
-          icon_emoji: config('ICON_EMOJI')
-        }
-        
         // var body = JSON.stringify( body )
         body = JSON.parse(body)
         var fixtures = body.fixtures
@@ -34,20 +35,22 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
             var awayGoals = result.goalsAwayTeam
             var homeGoals = result.goalsHomeTeam
 
-            return {
-              title: `${homeTeam} - ${homeGoals} V  ${awayGoals} ${awayTeam} `,
-              title_link: fixtureDate,
-              mrkdwn_in: ['text', 'pretext']
-            }
-        //   return {
-        //     title: `${repo.owner}/${repo.title} `,
-        //     title_link: repo.url,
-        //     text: `_${repo.description}_\n${repo.language} • ${repo.star}`,
-        //     mrkdwn_in: ['text', 'pretext']
-        //   }
-        })
+            var dateSplit = fixtureDate.split('T')
+            var fixtureDate = dateSplit[0]
 
-        console.log(attachments)
+            if ( awayGoals || homeGoals ) {
+
+                return {
+                  title: `${homeTeam} - ${homeGoals} V  ${awayGoals} ${awayTeam} `,
+                  title_link: fixtureDate,
+                  mrkdwn_in: ['text', 'pretext']
+                }
+            } else {
+                return {
+                    title: 'There seems to be a problem here..'
+                }
+            }
+        })
 
         let msg = _.defaults({ attachments: attachments }, msgDefaults)
 
@@ -58,23 +61,3 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
         })
     }
 });
-// trending('javascript', (err, repos) => {
-//   if (err) throw err
-//
-//   var attachments = repos.slice(0, 5).map((repo) => {
-//     return {
-//       title: `${repo.owner}/${repo.title} `,
-//       title_link: repo.url,
-//       text: `_${repo.description}_\n${repo.language} • ${repo.star}`,
-//       mrkdwn_in: ['text', 'pretext']
-//     }
-//   })
-//
-//   let msg = _.defaults({ attachments: attachments }, msgDefaults)
-//
-//   bot.sendWebhook(msg, (err, res) => {
-//     if (err) throw err
-//
-//     console.log(`\n🚀  Starbot report delivered 🚀`)
-//   })
-// })
