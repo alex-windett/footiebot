@@ -38,18 +38,17 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
             var dateSplit = fixtureDate.split('T')
             var fixtureDate = dateSplit[0]
 
-            if ( awayGoals || homeGoals ) {
+                if ( homeGoals === null & awayGoals === null ) {
+                    var title = `${homeTeam} V ${awayTeam} are yet to play`
+                } else {
+                    var title = `${homeTeam} - ${homeGoals} V  ${awayGoals} ${awayTeam} `
+                }
 
                 return {
-                  title: `${homeTeam} - ${homeGoals} V  ${awayGoals} ${awayTeam} `,
-                  title_link: fixtureDate,
-                  mrkdwn_in: ['text', 'pretext']
+                    title: title,
+                    title_link: fixtureDate,
+                    mrkdwn_in: ['text', 'pretext']
                 }
-            } else {
-                return {
-                    title: 'There seems to be a problem here..'
-                }
-            }
         })
 
         let msg = _.defaults({ attachments: attachments }, msgDefaults)
