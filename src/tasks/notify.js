@@ -13,13 +13,13 @@ var bot = controller.spawn()
 
 bot.configureIncomingWebhook({ url: config('WEBHOOK_URL') })
 
-const msgDefaults = {
-  response_type: 'in_channel',
-  username: 'Starbot',
-  icon_emoji: config('ICON_EMOJI')
-}
-
 request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (error, response, body) {
+
+    const msgDefaults = {
+      response_type: 'in_channel',
+      username: 'Starbot',
+      icon_emoji: config('ICON_EMOJI')
+    }
 
     if (!error && response.statusCode == 200) {
         // var body = JSON.stringify( body )
