@@ -36,16 +36,16 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
 
             var timeSinceStart =  now - startTime
 
-            if ( 7200 < timeSinceStart == timeSinceStart < 108000 ) {
+            if ( 7200 < timeSinceStart && timeSinceStart < 108000 ) {
                 return fixture
             } else {
-                return fixture
+                return false
             }
         })
 
         if ( finishedRecentlyFixtures ) {
 
-            var attachments = fixtures.map((fixture) => {
+            var attachments = finishedRecentlyFixtures.map((fixture) => {
                 var awayTeam = fixture.awayTeamName
                 var homeTeam = fixture.homeTeamName
                 var result  = fixture.result
@@ -54,7 +54,6 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
 
                 return {
                     title: 'Recent Results',
-                    color: '#1d93d2',
                     fields: [
                         {
                             title: homeTeam,
@@ -65,14 +64,18 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
                             value: awayGoals
                         }
                     ],
-                    mrkdwn_in: ['text', 'pretext']
                 }
             })
         } else {
             var attachments = {
                 title: 'Nothing results yet',
-                mrkdwn_in: ['text', 'pretext']
             }
+        }
+
+        var attachments = {
+            attachments,
+            color: '#1d93d2',
+            mrkdwn_in: ['text', 'pretext']
         }
 
         let msg = _.defaults({ attachments: attachments }, msgDefaults)
