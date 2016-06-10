@@ -5,6 +5,7 @@ const _ = require('lodash')
 const config = require('../config')
 const trending = require('github-trending')
 const Botkit = require('botkit')
+const http = require('http');
 
 var controller = Botkit.slackbot({})
 var bot = controller.spawn()
