@@ -27,30 +27,53 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
         body = JSON.parse(body)
         var fixtures = body.fixtures
 
-        var attachments = fixtures.map((fixture) => {
-            var fixtureDate = fixture.date
-            var awayTeam = fixture.awayTeamName
-            var homeTeam = fixture.homeTeamName
-            var result  = fixture.result
-            var awayGoals = result.goalsAwayTeam
-            var homeGoals = result.goalsHomeTeam
+        var finishedRecentlyFixtures = fixtures.map( fixture => {
+            var now = new Date().getTime()
+            var startTime = fixture.date
+                startTime = startTime.split('T')
+                startTime = startTime[0].split('-')
+                startTime = Date.UTC(startTime[0], startTime[1], startTime[2])
 
-            // Get just the date, not the time
-            var dateSplit = fixtureDate.split('T')
-            var fixtureDate = dateSplit[0]
+            var timeSinceStart =  now - startTime
 
-                if ( homeGoals === null & awayGoals === null ) {
-                    var title = `${homeTeam} V ${awayTeam} are playing on ${fixtureDate}`
-                } else {
-                    var title = `${homeTeam} - ${homeGoals} V  ${awayGoals} ${awayTeam} `
-                }
+            if ( 7200 < timeSinceStart == timeSinceStart < 108000 ) {
+                return fixture
+            } else {
+                return fixture
+            }
+        })
+
+        if ( finishedRecentlyFixtures ) {
+
+            var attachments = fixtures.map((fixture) => {
+                var awayTeam = fixture.awayTeamName
+                var homeTeam = fixture.homeTeamName
+                var result  = fixture.result
+                var awayGoals = result.goalsAwayTeam
+                var homeGoals = result.goalsHomeTeam
 
                 return {
-                    title: title,
-                    title_link: fixtureDate,
+                    title: 'Recent Results',
+                    color: '#1d93d2',
+                    fields: [
+                        {
+                            title: homeTeam,
+                            value: homeGoals
+                        },
+                        {
+                            title: awayTeam,
+                            value: awayGoals
+                        }
+                    ],
                     mrkdwn_in: ['text', 'pretext']
                 }
-        })
+            })
+        } else {
+            var attachments = {
+                title: 'Nothing results yet',
+                mrkdwn_in: ['text', 'pretext']
+            }
+        }
 
         let msg = _.defaults({ attachments: attachments }, msgDefaults)
 
