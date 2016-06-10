@@ -14,14 +14,14 @@ var bot = controller.spawn()
 bot.configureIncomingWebhook({ url: config('WEBHOOK_URL') })
 
 request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (error, response, body) {
-
-    const msgDefaults = {
-      response_type: 'in_channel',
-      username: 'Starbot',
-      icon_emoji: config('ICON_EMOJI')
-    }
-
     if (!error && response.statusCode == 200) {
+
+        const msgDefaults = {
+          response_type: 'in_channel',
+          username: 'Starbot',
+          icon_emoji: config('ICON_EMOJI')
+        }
+        
         // var body = JSON.stringify( body )
         body = JSON.parse(body)
         var fixtures = body.fixtures
