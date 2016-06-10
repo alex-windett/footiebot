@@ -1,8 +1,8 @@
-# 🌟 Starbot
+# Slack Bots
 
-![Starbot](https://heroku-www-files.s3.amazonaws.com/starbot/starbot-banner.png)
+Based off the [trending github project ](https://github.com/mattcreager/starbot)
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+To update push to heroku, and to run a script use `heroku run "npm run [script]"`
 
 Starbot is [GitHub's trending open-source](https://github.com/trending/) page, reincarnated as a Slack bot. It is also the sample referenced in the ["How to Deploy Your Slack Bots to Heroku"](https://blog.heroku.com/archives/2016/3/9/how-to-deploy-your-slack-bots-to-heroku) blog post.
 
