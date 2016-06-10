@@ -66,8 +66,3 @@ To https://git.heroku.com/blooming-scrubland-64464.git
 
 $ heroku open
 ```
-
-### License
-
-**[This project is licensed under the terms of the MIT license.](http://license-me.herokuapp.com)**
- -- [_Need your own? There's a button for that :wink:_](https://github.com/mattcreager/license)
