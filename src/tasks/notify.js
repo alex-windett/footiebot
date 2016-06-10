@@ -25,8 +25,8 @@ http.get(url, function(res) {
   res.on("data", function(chunk) {
     console.log("BODY: " + chunk);
 
-    var attachments = repos.slice(0, 5).map((repo) => {
-      return {
+    var attachments =
+       {
         title: `hello`,
         mrkdwn_in: ['text', 'pretext']
         // title: `${repo.owner}/${repo.title} `,
@@ -34,7 +34,18 @@ http.get(url, function(res) {
         // text: `_${repo.description}_\n${repo.language} • ${repo.star}`,
         // mrkdwn_in: ['text', 'pretext']
       }
-    })
+    // })
+
+    // var attachments = repos.slice(0, 5).map((repo) => {
+    //   return {
+    //     title: `hello`,
+    //     mrkdwn_in: ['text', 'pretext']
+    //     title: `${repo.owner}/${repo.title} `,
+    //     title_link: repo.url,
+    //     text: `_${repo.description}_\n${repo.language} • ${repo.star}`,
+    //     mrkdwn_in: ['text', 'pretext']
+    //   }
+    // })
 
     let msg = _.defaults({ attachments: attachments }, msgDefaults)
 
