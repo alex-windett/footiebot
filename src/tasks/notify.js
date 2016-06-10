@@ -35,6 +35,7 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
             var awayGoals = result.goalsAwayTeam
             var homeGoals = result.goalsHomeTeam
 
+            // Get just the date, not the time
             var dateSplit = fixtureDate.split('T')
             var fixtureDate = dateSplit[0]
 
