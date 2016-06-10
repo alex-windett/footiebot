@@ -39,7 +39,7 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
             var fixtureDate = dateSplit[0]
 
                 if ( homeGoals === null & awayGoals === null ) {
-                    var title = `${homeTeam} V ${awayTeam} are yet to play`
+                    var title = `${homeTeam} V ${awayTeam} are playing on ${fixtureDate}`
                 } else {
                     var title = `${homeTeam} - ${homeGoals} V  ${awayGoals} ${awayTeam} `
                 }
