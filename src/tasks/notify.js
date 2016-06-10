@@ -17,7 +17,7 @@ request('http://api.football-data.org/v1/soccerseasons/424/fixtures', function (
 
     const msgDefaults = {
       response_type: 'in_channel',
-      username: 'Starbot',
+      username: 'Footiebot',
       icon_emoji: config('ICON_EMOJI')
     }
 
