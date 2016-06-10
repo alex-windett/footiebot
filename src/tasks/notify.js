@@ -18,6 +18,7 @@ const msgDefaults = {
   icon_emoji: config('ICON_EMOJI')
 }
 
+var url = 'http://api.football-data.org/v1/soccerseasons/424/fixtures';
 http.get(url, function(res) {
   // console.log("Got response: " + res.statusCode);
 
