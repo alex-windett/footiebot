@@ -16,6 +16,8 @@ const config = {
   ICON_EMOJI: ':soccer:'
 }
 
+console.log(config)
+
 module.exports = (key) => {
   if (!key) return config
 
